@@ -1,12 +1,16 @@
-import express from "express"
-import { login, logout, singup } from "../controllers/auth.controller.js"; //This function are previously registered on the controller file.
+import express from "express";
+import { getMe, login, logout, signup } from "../controllers/auth.controller.js"; //This function are previously registered on the controller file.
+import { protectRoute } from "../middleware/protectRoute.js";
 
-const router=express.Router() // Initializes an instance of an Express Router for handling application routes.
+const router = express.Router(); // Initializes an instance of an Express Router for handling application routes.
 
-router.post("/signup", singup ) 
+router.get("/me", protectRoute, getMe);
 
-router.post("/login",login)
+router.post("/signup", signup);
 
-router.post("/logout",logout)
+router.post("/login", login);
+
+router.post("/logout", logout);
+
 
 export default router; //Export router for can be used in other components

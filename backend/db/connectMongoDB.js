@@ -1,14 +1,12 @@
 import mongoose from "mongoose";
 
-
-const connectMongoDB = async () =>{ //Conection to the db with a asynchronous function
+const connectMongoDB = async () => { // Connection to the database with an asynchronous function
     try {
-        const conn=await mongoose.connect(process.env.MONGO_URI)  //Await for the connection
-        console.log(`MongoDB connected: ${conn.connection.host}`)   //Print a message if the connection is established
-        
+        const conn = await mongoose.connect(process.env.MONGO_URI); // Wait for the connection to be established
+        console.log(`MongoDB connected: ${conn.connection.host}`);  // Print a message if the connection is established successfully
     } catch (error) {
-        console.error(`Error connection to MongoDB: ${error.message}`); //If the connection is not established show a message.
-        process.exit(1);
+        console.error(`Error connecting to MongoDB: ${error.message}`); // If the connection is not established, show an error message
+        process.exit(1); // Terminate the process with an error
     }
 }
 
