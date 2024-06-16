@@ -134,7 +134,7 @@ export const getMe = async (req, res) => {
       res.status(200).json({ user });
     } catch (error) {
       console.error("Error in getMe controller", error.message);
-      res.status(500).json({ error: error.message }); // Devuelve el mensaje de error específico
+      res.status(500).json({ error: error.message }); // Return a error if something went wrong
     }
   };
   
