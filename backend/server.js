@@ -2,6 +2,8 @@ import express from "express"
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
 import postRoutes from "./routes/post.route.js";
+import notificationRoutes from "./routes/notification.route.js";
+
 import dotenv from "dotenv";
 import connectMongoDB from "./db/connectMongoDB.js";
 import cookieParser from "cookie-parser";
@@ -21,6 +23,7 @@ app.use(express.json())  // Parse JSON-encoded bodies(req.body) to JavaScript ob
 app.use(express.urlencoded({ extended: true })) //To parse form data(urlencoded)
 app.use(cookieParser()) //  Parses cookies from express server and returns express object with cookie values.
 app.use("/api/auth", authRoutes) 
+app.use("/api/notifications", notificationRoutes) 
 app.use("/api/posts", postRoutes) 
 app.use("/api/users", userRoutes); //If one users try to access at the route /api/users is redirected to userRoutes.
 
