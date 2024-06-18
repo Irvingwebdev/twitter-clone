@@ -49,7 +49,14 @@ const userSchema=new mongoose.Schema({  //Schema object for the users table.
     link:{
         type:String,
         default:"",
-    }
+    },
+    likedPosts:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"Post",
+            default:[]
+        },
+    ],
 
 
 },{timestamps:true}) //Get the current timestamp for the current user
