@@ -21,8 +21,8 @@ function App() {
           const data=await res.json();
           if(data.error) return null;
           if(!res.ok) throw new Error(data.error  || "Somethin went wrong");        
-          console.log("Auth user is here:",data);
-          return data.user;    ///////----------------------------------------------------------------
+          console.log("Auth user is here:",data);  //!Suprime this line 
+          return data.user;    
       } catch (error) {
         throw new Error(error);
       }
@@ -38,7 +38,7 @@ function App() {
     )
   } 
 
-  console.log(authUser)
+  // console.log(authUser)
 
   return (
     <div className='flex max-w-6xl mx-auto'>
