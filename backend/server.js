@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.route.js";
@@ -10,6 +11,8 @@ import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 dotenv.config(); //Initialize environment
 const app = express(); //Initialize express how a const
+const PORT = process.env.PORT || 8000;
+const __dirname = path.resolve();
 console.log(process.env.MONGO_URI); //Show the environment variable
 
 cloudinary.config({
@@ -26,7 +29,13 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes); //If one users try to access at the route /api/users is redirected to userRoutes.
 
-const PORT = process.env.PORT || 8000;
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   //This is for turn on the server
