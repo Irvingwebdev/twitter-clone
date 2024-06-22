@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes, useLocation } from "react-router-dom"
 import LoginPage from "./pages/auth/login/LoginPage"
 import SignUpPage from "./pages/auth/signup/SignUpPage"
 import HomePage from "./pages/home/HomePage"
@@ -9,6 +9,7 @@ import ProfilePage from "./pages/profile/ProfilePage"
 import {Toaster} from "react-hot-toast"
 import { useQuery} from "@tanstack/react-query"
 import LoadingSpinner from "./components/common/LoadingSpinner"
+import Videos from "./pages/home/Videos"
 // import EditProfileModal from "./pages/profile/EditProfileModal"
 
 function App() {
@@ -50,9 +51,10 @@ function App() {
         <Route path="/signup" element={!authUser ? <SignUpPage/>: <Navigate to="/" />} />
         <Route path="/notifications" element={authUser ?<NotificationPage/>: <Navigate to="/login" />} />
         <Route path="/profile/:username" element={authUser ?<ProfilePage/>: <Navigate to="/login" />} />
+        <Route path="/videos/videos" element={authUser ?<Videos/>: <Navigate to="/login" />} />
 
       </Routes>
-        {authUser && <RightPanel/>}
+      {authUser && location.pathname !== '/videos/videos' && <RightPanel />}
         <Toaster/>
     </div>
   )
